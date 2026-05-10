@@ -1,0 +1,11 @@
+DataSets/
+models/
+__pycache__/
+*.pyc
+*.pkl
+*.h5
+*.log
+*.csv
+*.json
+*.ipynb_checkpoints/
+linux-venv/

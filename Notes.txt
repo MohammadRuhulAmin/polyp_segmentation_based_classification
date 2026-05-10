@@ -1,0 +1,3 @@
+Polyp Segmentation And Detection Datasets Link: https://www.kaggle.com/datasets/debeshjha1/kvasirseg
+
+Full Code: https://www.kaggle.com/code/ibrahimqasimi/polyp-segmentation-unet-resnet-custom
