@@ -6,6 +6,7 @@
 
 ![Training History](./public/training_history.png)
 
+
 For Activate GPU: 
 ```sh
 # Final Fix:
