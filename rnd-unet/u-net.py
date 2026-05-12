@@ -48,6 +48,7 @@ print(resizeto16)
 
 images = os.listdir(imagePath)
 print("image length: ",len(images))
+print(args.preprocess, "checking preprocess value")
 if args.preprocess:
     for imagefile in images:
         # for images
@@ -66,35 +67,36 @@ if args.preprocess:
         maskImages.append(mask)
     allImagesNP = np.array(allImages, dtype=np.float32)
     maskImageNP = np.array(maskImages, dtype=np.int32)
-
-np.save("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/allImages.npy", allImagesNP)
-np.save("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/maskImages.npy", maskImageNP)
+    np.save("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/allImages.npy", allImagesNP)
+    np.save("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/maskImages.npy", maskImageNP)
 
 # for compitibility with the tensorflow
 # allImagesNP = np.array(allImages)
 # maskImageNP = np.array(maskImages)
-allImagesNP = np.load("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/allImages.npy")
-maskImageNP = np.load("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/maskImages.npy")
-maskImageNP = maskImageNP.astype(int) # all the values should be integer (0 or 1)
+else:
+    print("Loading preprocessed data from .npy files")
+    allImagesNP = np.load("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/allImages.npy")
+    maskImageNP = np.load("/mnt/c/development/Thesis/PolypSegmentationBasedClassification/DataSets/Processed-Kvasir-SEG/maskImages.npy")
+    maskImageNP = maskImageNP.astype(int) # all the values should be integer (0 or 1)
 
-print(allImagesNP.shape)
-print(allImagesNP.dtype)
+    print(allImagesNP.shape)
+    print(allImagesNP.dtype)
 
-print(maskImageNP.shape)
-print(maskImageNP.dtype)
+    print(maskImageNP.shape)
+    print(maskImageNP.dtype)
 
-# split train and test
-from sklearn.model_selection import train_test_split
+    # split train and test
+    from sklearn.model_selection import train_test_split
 
-#90% train, 10% test
-X_train, X_test, y_train, y_test = train_test_split(allImagesNP, maskImageNP, test_size = 0.1, random_state=42)
-# 80% train, 10% val
-X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
+    #90% train, 10% test
+    X_train, X_test, y_train, y_test = train_test_split(allImagesNP, maskImageNP, test_size = 0.1, random_state=42)
+    # 80% train, 10% val
+    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size = 0.1, random_state=42)
 
-print("X_train, X_val, y_train, t_val-----> shapes:")
-print(X_train.shape)
-print(y_train.shape)
-print(X_val.shape)
-print(y_val.shape)
-print(X_test.shape)
-print(y_test.shape)
+    print("X_train, X_val, y_train, t_val-----> shapes:")
+    print(X_train.shape)
+    print(y_train.shape)
+    print(X_val.shape)
+    print(y_val.shape)
+    print(X_test.shape)
+    print(y_test.shape)
