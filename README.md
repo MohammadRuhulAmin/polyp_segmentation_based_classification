@@ -20,3 +20,14 @@ export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$VENV_PACKAGES/nvidia/cudnn/lib:$VENV_PA
 sudo ldconfig
 export TF_FORCE_GPU_ALLOW_GROWTH=true
 ```
+
+Datasets:
+1. PolypGen:  Download Link: https://www.synapse.org/Synapse:syn26376615/datasets/
+```sh
+    import synapseclient
+    import synapseutils
+    # to create token: Login(username:ruhulamin)-->Account Settings --> Create Access Token (Select Download tic mark)
+    syn = synapseclient.Synapse()
+    syn.login(authToken="your_auth_token")
+    synapseutils.syncFromSynapse(syn, "syn26376615")
+```
