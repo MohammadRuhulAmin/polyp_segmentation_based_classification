@@ -31,3 +31,4 @@ Datasets:
     syn.login(authToken="your_auth_token")
     synapseutils.syncFromSynapse(syn, "syn26376615")
 ```
+2. Kvasir-SEG: Download Link: https://datasets.simula.no/downloads/hyper-kvasir/hyper-kvasir-segmented-images.zip
