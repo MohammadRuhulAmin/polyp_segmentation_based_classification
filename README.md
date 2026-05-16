@@ -1,6 +1,6 @@
 
 # Polyp Segmentation Using U-Net Architecture
-
+TR-SE-Net (Triple-Receptive Squeeze-and-Excitation Network) also known as => Parallel Multi-Scale Depthwise Separable Squeeze-and-Excitation (PMS-DSSE) Block
 ![model predection result](./public/prediction_result.png)
 
 
