@@ -9,3 +9,5 @@ __pycache__/
 *.json
 *.ipynb_checkpoints/
 linux-venv/
+
+public/papers

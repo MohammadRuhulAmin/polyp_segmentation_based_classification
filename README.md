@@ -32,3 +32,13 @@ Datasets:
     synapseutils.syncFromSynapse(syn, "syn26376615")
 ```
 2. Kvasir-SEG: Download Link: https://datasets.simula.no/downloads/hyper-kvasir/hyper-kvasir-segmented-images.zip
+
+```sh
+                                      ┌──> UNET (Decoder) ──> Segmented Image (Mask)
+                                      │
+Input ➔ SE+PR-CNN ➔ UNET (Encoder) ───┤
+                                      │
+                                      └──> PD-CNN ➔ PCC ➔ Standardization ──> Classification (0/1
+
+
+```
