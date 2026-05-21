@@ -46,3 +46,70 @@ Input ➔ SE+PR-CNN ➔ UNET (Encoder) ───┤
 Important Keys:
 1. Multi-Task Learning (MTL) with Shared Representation
 2. Alternate Training / Decoupled Multi-Task Training।
+
+
+
+Full workflow:
+
+```sh
+[ Input Image: 256 × 256 × 3 ]
+                                │
+                                ▼
+                       ┌─────────────────┐
+                       │   SE+PR-CNN     │  (Lightweight Stem with
+                       │   Stem Block    │   Pointwise Residual)
+                       └─────────────────┘
+                                │
+                                ▼
+         ┌──────────────────────────────────────────────┐
+         │              SHARED ENCODER                  │
+         │  (Multi-scale Depthwise-Separable Convolutions│
+         │   with Squeeze-and-Excitation / SE-Blocks)   │
+         └──────────────────────────────────────────────┘
+            │          │               │             │
+          (c1)        (c2)           (c3)          (c4)  <── [Skip Connections]
+            │          │               │             │
+            ▼          ▼               ▼             ▼
+         ┌──────────────────────────────────────────────┐
+         │          Bottleneck: 16 × 16 × 512           │
+         └──────────────────────────────────────────────┘
+                                │
+         ┌──────────────────────┴──────────────────────┐
+         │                                             │
+         ▼ (Branch A: Segmentation)                    ▼ (Branch B: Classification)
+┌────────────────────────────────┐            ┌────────────────────────────────┐
+│         UNet Decoder           │            │           PD-CNN Head          │
+│ (Conv2DTranspose + Concatenate │            │  (Polyp-Discriminative CNN     │
+│    with Skip Connections)      │            │   - 2x Separable Conv Blocks)  │
+└────────────────────────────────┘            └────────────────────────────────┘
+         │                                             │
+         ▼                                             ▼
+┌────────────────────────────────┐            ┌────────────────────────────────┐
+│      Output: mask_output       │            │    Global Average Pooling      │
+│  (1 Channel Sigmoid - Float32) │            └────────────────────────────────┘
+└────────────────────────────────┘                             │
+                                                               ▼
+                                              ┌────────────────────────────────┐
+                                              │           PCC Layer            │
+                                              │ (Pearson Correlation Coeff.   │
+                                              │  Inter-channel Signal Math)    │
+                                              └────────────────────────────────┘
+                                                               │
+                                                               ▼
+                                              ┌────────────────────────────────┐
+                                              │      Batch Normalization       │
+                                              │      (Z-Score Standard)        │
+                                              └────────────────────────────────┘
+                                                               │
+                                                               ▼
+                                              ┌────────────────────────────────┐
+                                              │      Dense + Dropout Layers    │
+                                              └────────────────────────────────┘
+                                                               │
+                                                               ▼
+                                              ┌────────────────────────────────┐
+                                              │     Output: class_output       │
+                                              │    (1 Value Sigmoid - Float32) │
+                                              └────────────────────────────────┘
+
+```
