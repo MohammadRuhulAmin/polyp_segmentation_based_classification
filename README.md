@@ -42,3 +42,7 @@ Input ➔ SE+PR-CNN ➔ UNET (Encoder) ───┤
 
 
 ```
+
+Important Keys:
+1. Multi-Task Learning (MTL) with Shared Representation
+2. Alternate Training / Decoupled Multi-Task Training।
