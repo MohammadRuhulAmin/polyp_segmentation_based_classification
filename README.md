@@ -38,7 +38,7 @@ Datasets:
                                       │
 Input ➔ SE+PR-CNN ➔ UNET (Encoder) ───┤
                                       │
-                                      └──> PD-CNN ➔ PCC ➔ Standardization ──> Classification (0/1
+                                      └──> PD-CNN ➔ PCC ➔ Standardization ──> Classification (0/1)
 
 
 ```
