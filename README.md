@@ -264,3 +264,88 @@ Advanced Architecture:
 
 
 ```
+
+
+Transfer learning based Segmentation and Classification: 
+
+
+```sh
+==========================================================================================
+                          PHASE 1: LOCALIZATION ENGINE
+==========================================================================================
+ [Dataset B: Multi-Center] ➔ (Images, Semantic Masks)
+                                     │
+                                     ▼
+                      [ process_path_segmentation() ]
+                     (Resize 256x256, Min-Max, Nearest)
+                                     │
+                                     ▼
+                           [ Data Augmentation ]
+                    (Geometric Flips + Radiometric Jitter)
+                                     │
+                                     ▼
+                             [ SHARED ENCODER ]
+                         (Parallel 3x3,5x5,7x7 + SE)
+                                     │
+                                     ▼
+                         [ LATENT EMBEDDING SHUTTLE ]
+                             (Shared Bottleneck)
+                                     │
+                 ┌───────────────────┴───────────────────┐
+                 ▼ (Active)                              ▼ (Inactive)
+       [ SEGMENTATION DECODER ]                 [ CLASSIFICATION HEAD ]
+        (Conv2DTranspose + Skip)                 (PD-CNN + PCC + Z-Score)
+                 │                                       │
+                 ▼                                       ▼
+       [ Predicted Mask (0) ]                   [ Suppressed Node (1) ]
+                 │
+                 ├───────────────────────────────────────┘
+                 ▼
+       [ Positional Loss Evaluation ] ➔ [ bce_dice_loss ] ➔ Updates Encoder & Decoder
+       
+                          🔒 [Checkpoint Achieved] 
+              Best Segmentation Model Weights Saved to .keras File
+              
+==========================================================================================
+                         PHASE 2: TRANSFER LEARNING CLASSIFIER
+==========================================================================================
+ [Dataset A: Diagnostic] ➔ (Positive/Negative Sequences)
+                                     │
+                                     ▼
+                    [ process_path_classification() ]
+                        (Resize 256x256, Normalize)
+                                     │
+                                     ▼
+                     🔄 Reload Best Phase 1 Checkpoint
+                                     │
+            ❄️ FREEZE: All Encoder, Bottleneck & Decoder Layers (trainable=False)
+                                     │
+                                     ▼
+                         [ SHARED ENCODER (LOCKED) ]
+                    (Outputs Peak Localization Embeddings)
+                                     │
+                                     ▼
+                         [ LATENT EMBEDDING SHUTTLE ]
+                             (Shared Bottleneck)
+                                     │
+                 ┌───────────────────┴───────────────────┐
+                 ▼ (Inactive)                            ▼ (Active)
+       [ Predicted Mask (0) ]                   [ CLASSIFICATION HEAD ]
+       (Loss Calculations Bypassed)              - PD-CNN (Depthwise Separable)
+                                                 - KerasPCCLayer (Auto-Correlation)
+                                                 - Z-Score Standardization (BN)
+                                                 - Dense Classifier Layer
+                                                         │
+                                                         ▼
+                                               [ Predicted Label (1) ]
+                                                         │
+                 ┌───────────────────────────────────────┘
+                 ▼
+       [ Positional Loss Evaluation ] ➔ [ binary_crossentropy ] ➔ Updates ONLY Classification Layers
+
+                          🏆 [Final Integrated Graph]
+                Unified Model Predicts Masks & Diagnoses Simultaneously
+==========================================================================================
+
+
+```
