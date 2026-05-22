@@ -199,3 +199,68 @@ During backpropagation, the model updates its weights in such a way that it lear
 * Perform correct polyp classification simultaneously
 
 This can be defended in your thesis as a form of **Multi-Objective Topology Optimization**, where the network is optimized for two interdependent medical imaging objectives at the same time.
+
+
+Advanced Architecture: 
+
+```sh 
+
+                                    [ Input Image: 256 × 256 × 3 ]
+                                                  │
+                                                  ▼
+                                      ┌───────────────────────┐
+                                      │    SE+PR-CNN Stem     │ (filters=32)
+                                      └───────────────────────┘
+                                                  │
+                                                  ▼
+    ┌───────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                 SHARED UNET ENCODER                                       │
+    │  [c1] Multi-Scale DS-Conv (32) ──► MaxPooling (128x128)                                   │
+    │  [c2] Multi-Scale DS-Conv (64) ──► MaxPooling (64x64)                                     │
+    │  [c3] Multi-Scale DS-Conv (128) ──► MaxPooling (32x32)                                    │
+    │  [c4] Multi-Scale DS-Conv (256) ──► MaxPooling (16x16)                                    │
+    └───────────────────────────────────────────────────────────────────────────────────────────┘
+         │               │                │               │
+       (Skip1)         (Skip2)          (Skip3)         (Skip4)
+         │               │                │               │
+         ▼               ▼                ▼               ▼
+    ┌───────────────────────────────────────────────────────────────────────────────────────────┐
+    │                               BOTTLENECK: 16 × 16 × 512                                   │
+    └───────────────────────────────────────────────────────────────────────────────────────────┘
+         │                                                                              │
+         ▼ (BRANCH A: Segmentation & Deep Supervision)                                  ▼ (BRANCH B: Classification)
+┌─────────────────────────────────────────────────────────┐               ┌───────────────────────────────┐
+│                     UNET DECODER                        │               │          PD-CNN Head          │
+│                                                         │               │ (Separable Conv Blocks, f=128)│
+│ [d4] Conv2DTrans + Skip4 ──► [aux_d4] (Upsample 8x)     │               └───────────────────────────────┘
+│ [d3] Conv2DTrans + Skip3 ──► [aux_d3] (Upsample 4x)     │                               │
+│ [d2] Conv2DTrans + Skip2 ──► [aux_d2] (Upsample 2x)     │                               ▼
+│ [d1] Conv2DTrans + Skip1 ──► [mask_output] (Primary)    │               ┌───────────────────────────────┐
+└─────────────────────────────────────────────────────────┘               │    Global Average Pooling     │
+         │                │           │            │                      └───────────────────────────────┘
+         ▼                ▼           ▼            ▼                                      │
+   [mask_output]      [aux_d4]    [aux_d3]     [aux_d2]                                   ▼
+    (Sigmoid)         (Sigmoid)   (Sigmoid)    (Sigmoid)                  ┌───────────────────────────────┐
+         │                │           │            │                      │           PCC Layer           │
+         └────────────────┼───────────┼────────────┘                      │ (Pearson Correlation Coeff.)  │
+                          │           │                                   └───────────────────────────────┘
+                          ▼           ▼                                                   │
+             ┌─────────────────────────────────────────┐                                  ▼
+             │         Loss Engine Calculation         │                  ┌───────────────────────────────┐
+             │  • Focal Tversky Loss (Recall Focus)    │                  │      Batch Normalization      │
+             │  • Weighted BCE (Pos Weight = 10)       │                  └───────────────────────────────┘
+             │  • Sobel Edge/Boundary Loss             │                                  │
+             └─────────────────────────────────────────┘                                  ▼
+                                  │                                       ┌───────────────────────────────┐
+                                  │                                       │     Dense + Dropout Layers    │
+                                  │                                       └───────────────────────────────┘
+                                  │                                                       │
+                                  ▼                                                       ▼
+                       ┌─────────────────────────────────────────────────────────────────────┐
+                       │     Phase-Aware Optimizer (Gradient Budget Redirection)             │
+                       │     • Phase 1 (Dual-Task): Seg=80%, Clf=20%                         │
+                       │     • Phase 2 (Seg-Focused): Seg=97%, Clf=3% (Triggered at Acc>88%) │
+                       └─────────────────────────────────────────────────────────────────────┘
+
+
+```
