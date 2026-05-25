@@ -63,7 +63,7 @@ Full workflow:
                                 ▼
          ┌──────────────────────────────────────────────┐
          │              SHARED ENCODER                  │
-         │  (Multi-scale Depthwise-Separable Convolutions│
+         │ (Multi-scale Depthwise-Separable Convolutions│
          │   with Squeeze-and-Excitation / SE-Blocks)   │
          └──────────────────────────────────────────────┘
             │          │               │             │
@@ -349,3 +349,7 @@ Transfer learning based Segmentation and Classification:
 
 
 ```
+
+#### Ensemble ELM (Extreme Learning machine):
+A group of prediction algorithms or a group of predictors who gets all the datasets and 
+classify by voting.
