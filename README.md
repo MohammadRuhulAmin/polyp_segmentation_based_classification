@@ -52,7 +52,7 @@ Important Keys:
 Full workflow:
 
 ```sh
-[ Input Image: 256 × 256 × 3 ]
+                  [ Input Image: 256 × 256 × 3 ]
                                 │
                                 ▼
                        ┌─────────────────┐
