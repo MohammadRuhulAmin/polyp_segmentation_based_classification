@@ -11,3 +11,4 @@ __pycache__/
 linux-venv/
 
 public/papers
+y-net/y-net-elm/*.png
