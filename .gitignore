@@ -9,6 +9,6 @@ __pycache__/
 *.json
 *.ipynb_checkpoints/
 linux-venv/
-
+y-net/y-net-elm/evaluation_results_100/
 public/papers
-y-net/y-net-elm/*.png
+y-net/y-net-elm/tests
