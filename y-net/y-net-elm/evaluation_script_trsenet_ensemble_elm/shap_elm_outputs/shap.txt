@@ -1,0 +1,123 @@
+import os
+import numpy as np
+import tensorflow as tf
+import shap
+import matplotlib.pyplot as plt
+
+# Ensure notebook rendering directly inside cell output
+%matplotlib inline
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ⚙️ SYSTEM PATHS & ENSEMBLE ELM WEIGHTS CONFIGURATION
+# ─────────────────────────────────────────────────────────────────────────────
+IMG_SIZE = 256
+MODEL_PATH = "/mnt/c/development/Thesis/PolypSegmentationBasedClassification/models/SC/tr-elm/thesis_v3_sequential_v_eval_v1.keras"
+
+# FIXME: আপনার আসল NumPy Ensemble ELM weights এবং bias ভেরিয়েবল এখানে অ্যাসাইন করুন
+# Assuming input features match the 1024D bottleneck space
+ELM_WEIGHTS = np.random.randn(1024, 1).astype(np.float32) # Replace with GLOBAL_ensemble_weights
+ELM_BIAS = np.zeros((1,)).astype(np.float32)            # Replace with GLOBAL_ensemble_bias
+
+OUTPUT_DIR = "./shap_elm_outputs"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔮 CUSTOM ENSEMBLE ELM PREDICTION FUNCTION FOR SHAP (FIXED)
+# ─────────────────────────────────────────────────────────────────────────────
+def ensemble_elm_predict(feature_matrices):
+    """
+    Mathematical forward pass of your custom Ensemble ELM.
+    Guarantees a strictly 2D array output structure for SHAP consistency.
+    """
+    # 1. ফিচার ম্যাট্রিক্স যদি ১ডি হয় (সিঙ্গেল স্যাম্পল), ওটাকে ২ডি করে নেওয়া
+    if len(feature_matrices.shape) == 1:
+        feature_matrices = np.expand_dims(feature_matrices, axis=0)
+        
+    # 2. Matrix Multiplication: H * Beta
+    raw_outputs = np.dot(feature_matrices, ELM_WEIGHTS) + ELM_BIAS
+    
+    # 3. Sigmoid activation to convert raw logits into probability scores [0, 1]
+    probabilities = 1 / (1 + np.exp(-raw_outputs))
+    
+    # 🔥 [CRITICAL INDEX FIX]: SHAP-এর জন্য আউটপুটকে সবসময় ২ডি (Samples, 1) অ্যারে ফরম্যাটে রাখতে হবে
+    return probabilities.reshape(-1, 1)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🚀 CORE SHAP ATTRIBUTION PIPELINE (FIXED)
+# ─────────────────────────────────────────────────────────────────────────────
+def run_shap_analysis(keras_model, X_test_images):
+    """
+    Extracts 1024D features from clf_zscore_bn and computes global Shapley values.
+    """
+    print("\n➔ Step 1: Building Intermediate Feature Extractor up to 'clf_zscore_bn'...")
+    # Slicing the network right before the NumPy ELM boundary
+    feature_extractor = tf.keras.models.Model(
+        inputs=[keras_model.input],
+        outputs=[keras_model.get_layer('clf_zscore_bn').output]
+    )
+    
+    print("➔ Step 2: Extracting 1024D high-dimensional features from test set...")
+    # Extract features -> Shape: (Num_Images, 1024)
+    extracted_features = feature_extractor.predict(X_test_images, batch_size=4)
+    extracted_features = extracted_features.astype(np.float32)
+    
+    print(f"   [Data Shape] Total Samples: {extracted_features.shape[0]}, Feature Vector Size: {extracted_features.shape[1]}")
+
+    print("\n➔ Step 3: Initializing SHAP Explainer (Background Data Tuning)...")
+    # Using a representative subset (K-Medoids or Mean) as background data to speed up KernelSHAP
+    background_summary = shap.kmeans(extracted_features, 10) 
+    
+    # Initialize the Kernel Explainer with our custom ELM decision function
+    explainer = shap.KernelExplainer(ensemble_elm_predict, background_summary)
+
+    print("➔ Step 4: Computing Shapley Attribution Values...")
+    # Compute SHAP values for the test instances (evaluating first 30 samples for safe runtime)
+    test_subset = extracted_features[:30]
+    shap_values = explainer.shap_values(test_subset)
+
+    print("\n➔ Step 5: Generating Paper-Ready Visualizations...")
+    feature_names = [f"PCC_Feature_{i}" for i in range(extracted_features.shape[1])]
+    
+    # 🔥 [CRITICAL PLOT FIX]: SHAP-এর নতুন ২ডি আউটপুট ফরম্যাট হ্যান্ডেল করার জন্য স্লাইসিং ফিক্স
+    if isinstance(shap_values, list):
+        shap_values_to_plot = shap_values[0]
+    elif len(shap_values.shape) == 3:
+        shap_values_to_plot = shap_values[:, :, 0]
+    else:
+        shap_values_to_plot = shap_values
+
+    # --- PLOT 1: Global Feature Importance Bar Plot ---
+    plt.figure(figsize=(10, 6), dpi=140)
+    plt.rcParams['font.family'] = 'sans-serif'
+    plt.title("Global Feature Importance Allocation (Ensemble ELM)", fontsize=12, fontweight='bold', pad=15)
+    
+    # Generate standard summary plot
+    shap.summary_plot(shap_values_to_plot, test_subset, feature_names=feature_names, plot_type="bar", show=False)
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, "shap_global_bar_plot.png"), dpi=300, bbox_inches='tight')
+    plt.show()
+
+    # --- PLOT 2: Summary Beeswarm Plot (Shows Impact Direction) ---
+    plt.figure(figsize=(10, 6), dpi=140)
+    plt.title("SHAP Beeswarm Distribution: Feature Value vs. Model Output", fontsize=12, fontweight='bold', pad=15)
+    shap.summary_plot(shap_values_to_plot, test_subset, feature_names=feature_names, show=False)
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUTPUT_DIR, "shap_beeswarm_plot.png"), dpi=300, bbox_inches='tight')
+    plt.show()
+    
+    print(f"🏆 [SHAP SUCCESS] All plots saved successfully in: {OUTPUT_DIR}")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🏃‍♂️ RUNTIME INITIALIZATION
+# ─────────────────────────────────────────────────────────────────────────────
+if __name__ == '__main__':
+    print("⏳ Loading Shared Keras Graph Topology...")
+    shared_model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    
+    # FIXME: আপনার ওরিজিনাল প্রিপিসেসড টেস্ট ইমেজ ডাটাসেট (X_test) এখানে দিন।
+    # For execution safety, generating a mock batch array matching (Batch, Height, Width, Channels)
+    print("⚠️ Creating baseline verification image array...")
+    mock_x_test = np.random.rand(40, IMG_SIZE, IMG_SIZE, 3).astype(np.float32) 
+    
+    # Run the engine
+    run_shap_analysis(shared_model, mock_x_test)
