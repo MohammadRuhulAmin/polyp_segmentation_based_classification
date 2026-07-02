@@ -11,4 +11,6 @@ __pycache__/
 linux-venv/
 y-net/y-net-elm/evaluation_results_100/
 public/papers
+public/writing_docs
 y-net/y-net-elm/tests
+depricated/
