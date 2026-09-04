@@ -18,3 +18,4 @@ outputs/
 
 y-net/y-net-elm/diagram
 y-net/y-net-elm/select-Xai
+*.npz
