@@ -1,0 +1,4 @@
+TR (Transposed-Residual): In our U-Net decoder and feature expansion pipeline, we utilize upsampling pathways (layers.UpSampling2D) combined with hierarchical skip-connections (layers.Concatenate) that pass fine-grained spatial information from the encoder to the decoder. This 'transposed-decoding' and residual-style feature reuse ensures that the delicate, irregular boundaries of colorectal polyps are accurately reconstructed.
+
+SE (Separable-Efficient): The backbone of our network is built entirely using Depthwise-Separable Convolutions (layers.SeparableConv2D in our dsconv function). By factorizing standard convolutions into depthwise and pointwise operations, the model achieves extreme computational efficiency—maintaining under 0.5M parameters, low GMACs, and a high real-time inference speed (over 50 FPS) required for clinical screening, hence Separable-Efficient."*
+NET: Network
