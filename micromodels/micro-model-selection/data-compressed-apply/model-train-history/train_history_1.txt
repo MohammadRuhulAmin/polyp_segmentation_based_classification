@@ -1,0 +1,331 @@
+Split -> train 800 | val 100 | test 100
+                                                                                                                                                               
+[train] saved cache: 45.3 MB (raw uint8 78.1 MB)
+                                                                                                                                                               
+[val] saved cache: 5.6 MB (raw uint8 9.8 MB)
+                                                                                                                                                               
+[test] saved cache: 5.7 MB (raw uint8 9.8 MB)
+Device: GPU
+Params: 0.2457 M | GMACs: 0.124
+                                                                                                    
+[Ep 001/60 |   1.7%]  50.3s | ETA   49.0 min | lr 6.00e-04
+   train: loss 1.2659 | dice 0.3961 | iou 0.2721
+   val  : loss 1.3902 | dice 0.0000 | iou 0.0000 | prec 1.0000 | rec 0.0000 | spec 1.0000 | acc 0.8193
+   best val dice 0.0000  <-- new best, model saved
+                                                                                                    
+[Ep 002/60 |   3.3%]  29.9s | ETA   38.8 min | lr 1.08e-03
+   train: loss 1.0328 | dice 0.4666 | iou 0.3369
+   val  : loss 1.2896 | dice 0.0000 | iou 0.0000 | prec 1.0000 | rec 0.0000 | spec 1.0000 | acc 0.8193
+   best val dice 0.0000  (no gain for 1/20)
+                                                                                                    
+[Ep 003/60 |   5.0%]  25.3s | ETA   33.4 min | lr 1.56e-03
+   train: loss 0.9620 | dice 0.4664 | iou 0.3406
+   val  : loss 1.3423 | dice 0.0000 | iou 0.0000 | prec 1.0000 | rec 0.0000 | spec 1.0000 | acc 0.8193
+   best val dice 0.0000  (no gain for 2/20)
+                                                                                                    
+[Ep 004/60 |   6.7%]  23.7s | ETA   30.0 min | lr 2.04e-03
+   train: loss 0.9012 | dice 0.5038 | iou 0.3775
+   val  : loss 1.4562 | dice 0.0003 | iou 0.0001 | prec 1.0000 | rec 0.0001 | spec 1.0000 | acc 0.8194
+   best val dice 0.0003  <-- new best, model saved
+                                                                                                    
+[Ep 005/60 |   8.3%]  24.7s | ETA   28.1 min | lr 2.52e-03
+   train: loss 0.8328 | dice 0.5565 | iou 0.4305
+   val  : loss 0.9846 | dice 0.4576 | iou 0.3491 | prec 0.7454 | rec 0.4087 | spec 0.9814 | acc 0.8616
+   best val dice 0.4576  <-- new best, model saved
+                                                                                                    
+[Ep 006/60 |  10.0%]  23.7s | ETA   26.6 min | lr 3.00e-03
+   train: loss 0.7960 | dice 0.5800 | iou 0.4559
+   val  : loss 2.1242 | dice 0.4804 | iou 0.3550 | prec 0.4067 | rec 0.7544 | spec 0.7775 | acc 0.7614
+   best val dice 0.4804  <-- new best, model saved
+                                                                                                    
+[Ep 007/60 |  11.7%]  23.3s | ETA   25.4 min | lr 3.00e-03
+   train: loss 0.7605 | dice 0.6092 | iou 0.4895
+   val  : loss 1.1898 | dice 0.3882 | iou 0.2800 | prec 0.7735 | rec 0.3036 | spec 0.9803 | acc 0.8537
+   best val dice 0.4804  (no gain for 1/20)
+                                                                                                    
+[Ep 008/60 |  13.3%]  23.5s | ETA   24.3 min | lr 2.99e-03
+   train: loss 0.7072 | dice 0.6384 | iou 0.5223
+   val  : loss 0.9435 | dice 0.6004 | iou 0.4854 | prec 0.6871 | rec 0.6083 | spec 0.9428 | acc 0.8629
+   best val dice 0.6004  <-- new best, model saved
+                                                                                                    
+[Ep 009/60 |  15.0%]  25.5s | ETA   23.6 min | lr 2.98e-03
+   train: loss 0.6489 | dice 0.6740 | iou 0.5601
+   val  : loss 0.8181 | dice 0.6214 | iou 0.5107 | prec 0.6769 | rec 0.6643 | spec 0.9487 | acc 0.8774
+   best val dice 0.6214  <-- new best, model saved
+                                                                                                    
+[Ep 010/60 |  16.7%]  26.3s | ETA   23.0 min | lr 2.96e-03
+   train: loss 0.6269 | dice 0.6893 | iou 0.5775
+   val  : loss 1.2094 | dice 0.6095 | iou 0.4727 | prec 0.5421 | rec 0.8372 | spec 0.8295 | acc 0.8257
+   best val dice 0.6214  (no gain for 1/20)
+                                                                                                    
+[Ep 011/60 |  18.3%]  20.6s | ETA   22.0 min | lr 2.94e-03
+   train: loss 0.6196 | dice 0.6893 | iou 0.5792
+   val  : loss 1.0161 | dice 0.5809 | iou 0.4889 | prec 0.7019 | rec 0.5630 | spec 0.9635 | acc 0.8753
+   best val dice 0.6214  (no gain for 2/20)
+                                                                                                    
+[Ep 012/60 |  20.0%]  20.8s | ETA   21.2 min | lr 2.91e-03
+   train: loss 0.5774 | dice 0.7146 | iou 0.6096
+   val  : loss 0.7928 | dice 0.6490 | iou 0.5385 | prec 0.8122 | rec 0.6092 | spec 0.9680 | acc 0.8837
+   best val dice 0.6490  <-- new best, model saved
+                                                                                                    
+[Ep 013/60 |  21.7%]  22.6s | ETA   20.5 min | lr 2.88e-03
+   train: loss 0.5615 | dice 0.7231 | iou 0.6166
+   val  : loss 0.6863 | dice 0.7156 | iou 0.5983 | prec 0.7464 | rec 0.7800 | spec 0.9177 | acc 0.8948
+   best val dice 0.7156  <-- new best, model saved
+                                                                                                    
+[Ep 014/60 |  23.3%]  20.9s | ETA   19.8 min | lr 2.84e-03
+   train: loss 0.5791 | dice 0.7187 | iou 0.6123
+   val  : loss 0.6549 | dice 0.7268 | iou 0.6231 | prec 0.8359 | rec 0.7022 | spec 0.9764 | acc 0.9089
+   best val dice 0.7268  <-- new best, model saved
+                                                                                                    
+[Ep 015/60 |  25.0%]  21.2s | ETA   19.1 min | lr 2.80e-03
+   train: loss 0.5608 | dice 0.7273 | iou 0.6231
+   val  : loss 0.6088 | dice 0.7406 | iou 0.6324 | prec 0.7442 | rec 0.8266 | spec 0.9286 | acc 0.8996
+   best val dice 0.7406  <-- new best, model saved
+                                                                                                    
+[Ep 016/60 |  26.7%]  20.1s | ETA   18.4 min | lr 2.75e-03
+   train: loss 0.5292 | dice 0.7459 | iou 0.6423
+   val  : loss 0.6538 | dice 0.6835 | iou 0.5825 | prec 0.8615 | rec 0.6270 | spec 0.9849 | acc 0.8997
+   best val dice 0.7406  (no gain for 1/20)
+                                                                                                    
+[Ep 017/60 |  28.3%]  20.6s | ETA   17.8 min | lr 2.70e-03
+   train: loss 0.5392 | dice 0.7457 | iou 0.6415
+   val  : loss 0.5993 | dice 0.7356 | iou 0.6288 | prec 0.7779 | rec 0.7748 | spec 0.9526 | acc 0.9072
+   best val dice 0.7406  (no gain for 2/20)
+                                                                                                    
+[Ep 018/60 |  30.0%]  23.6s | ETA   17.4 min | lr 2.65e-03
+   train: loss 0.5197 | dice 0.7427 | iou 0.6384
+   val  : loss 0.5257 | dice 0.7665 | iou 0.6638 | prec 0.8435 | rec 0.7651 | spec 0.9707 | acc 0.9183
+   best val dice 0.7665  <-- new best, model saved
+                                                                                                    
+[Ep 019/60 |  31.7%]  23.0s | ETA   16.9 min | lr 2.59e-03
+   train: loss 0.5021 | dice 0.7538 | iou 0.6538
+   val  : loss 0.5917 | dice 0.7341 | iou 0.6232 | prec 0.7638 | rec 0.7989 | spec 0.9326 | acc 0.9010
+   best val dice 0.7665  (no gain for 1/20)
+                                                                                                    
+[Ep 020/60 |  33.3%]  20.9s | ETA   16.4 min | lr 2.53e-03
+   train: loss 0.5098 | dice 0.7544 | iou 0.6542
+   val  : loss 0.5650 | dice 0.7542 | iou 0.6563 | prec 0.8063 | rec 0.7789 | spec 0.9556 | acc 0.9111
+   best val dice 0.7665  (no gain for 2/20)
+                                                                                                    
+[Ep 021/60 |  35.0%]  21.3s | ETA   15.8 min | lr 2.46e-03
+   train: loss 0.4888 | dice 0.7666 | iou 0.6694
+   val  : loss 0.5497 | dice 0.7433 | iou 0.6235 | prec 0.7059 | rec 0.8828 | spec 0.9169 | acc 0.9007
+   best val dice 0.7665  (no gain for 3/20)
+                                                                                                    
+[Ep 022/60 |  36.7%]  22.6s | ETA   15.4 min | lr 2.40e-03
+   train: loss 0.4950 | dice 0.7617 | iou 0.6601
+   val  : loss 0.5501 | dice 0.7691 | iou 0.6692 | prec 0.8087 | rec 0.7916 | spec 0.9546 | acc 0.9160
+   best val dice 0.7691  <-- new best, model saved
+                                                                                                    
+[Ep 023/60 |  38.3%]  21.7s | ETA   14.9 min | lr 2.32e-03
+   train: loss 0.4775 | dice 0.7678 | iou 0.6687
+   val  : loss 0.7114 | dice 0.6991 | iou 0.6125 | prec 0.8275 | rec 0.6695 | spec 0.9802 | acc 0.9070
+   best val dice 0.7691  (no gain for 1/20)
+                                                                                                    
+[Ep 024/60 |  40.0%]  23.0s | ETA   14.5 min | lr 2.25e-03
+   train: loss 0.4801 | dice 0.7682 | iou 0.6681
+   val  : loss 0.4926 | dice 0.7710 | iou 0.6711 | prec 0.9021 | rec 0.7303 | spec 0.9820 | acc 0.9266
+   best val dice 0.7710  <-- new best, model saved
+                                                                                                    
+[Ep 025/60 |  41.7%]  20.7s | ETA   14.0 min | lr 2.17e-03
+   train: loss 0.4462 | dice 0.7805 | iou 0.6841
+   val  : loss 0.4975 | dice 0.7745 | iou 0.6839 | prec 0.8234 | rec 0.7913 | spec 0.9650 | acc 0.9240
+   best val dice 0.7745  <-- new best, model saved
+                                                                                                    
+[Ep 026/60 |  43.3%]  21.3s | ETA   13.5 min | lr 2.09e-03
+   train: loss 0.4456 | dice 0.7854 | iou 0.6922
+   val  : loss 0.6184 | dice 0.7485 | iou 0.6425 | prec 0.7485 | rec 0.8528 | spec 0.9186 | acc 0.8961
+   best val dice 0.7745  (no gain for 1/20)
+                                                                                                    
+[Ep 027/60 |  45.0%]  21.5s | ETA   13.1 min | lr 2.01e-03
+   train: loss 0.4420 | dice 0.7870 | iou 0.6918
+   val  : loss 0.5041 | dice 0.7580 | iou 0.6620 | prec 0.7901 | rec 0.8004 | spec 0.9558 | acc 0.9201
+   best val dice 0.7745  (no gain for 2/20)
+                                                                                                    
+[Ep 028/60 |  46.7%]  20.5s | ETA   12.6 min | lr 1.93e-03
+   train: loss 0.4325 | dice 0.7936 | iou 0.7003
+   val  : loss 0.4847 | dice 0.7757 | iou 0.6796 | prec 0.8856 | rec 0.7555 | spec 0.9811 | acc 0.9296
+   best val dice 0.7757  <-- new best, model saved
+                                                                                                    
+[Ep 029/60 |  48.3%]  20.5s | ETA   12.2 min | lr 1.85e-03
+   train: loss 0.4332 | dice 0.7890 | iou 0.6946
+   val  : loss 0.4593 | dice 0.7809 | iou 0.6807 | prec 0.8414 | rec 0.8011 | spec 0.9654 | acc 0.9229
+   best val dice 0.7809  <-- new best, model saved
+                                                                                                    
+[Ep 030/60 |  50.0%]  19.3s | ETA   11.7 min | lr 1.76e-03
+   train: loss 0.4257 | dice 0.7929 | iou 0.7006
+   val  : loss 0.4487 | dice 0.7906 | iou 0.6937 | prec 0.8601 | rec 0.7960 | spec 0.9705 | acc 0.9304
+   best val dice 0.7906  <-- new best, model saved
+                                                                                                    
+[Ep 031/60 |  51.7%]  21.0s | ETA   11.3 min | lr 1.67e-03
+   train: loss 0.4483 | dice 0.7866 | iou 0.6934
+   val  : loss 0.4414 | dice 0.8017 | iou 0.7012 | prec 0.7835 | rec 0.8758 | spec 0.9412 | acc 0.9269
+   best val dice 0.8017  <-- new best, model saved
+                                                                                                    
+[Ep 032/60 |  53.3%]  22.9s | ETA   10.9 min | lr 1.59e-03
+   train: loss 0.4228 | dice 0.7941 | iou 0.7022
+   val  : loss 0.4340 | dice 0.8018 | iou 0.7051 | prec 0.8380 | rec 0.8222 | spec 0.9624 | acc 0.9283
+   best val dice 0.8018  <-- new best, model saved
+                                                                                                    
+[Ep 033/60 |  55.0%]  20.0s | ETA   10.5 min | lr 1.50e-03
+   train: loss 0.4306 | dice 0.7960 | iou 0.7032
+   val  : loss 0.4566 | dice 0.7894 | iou 0.6886 | prec 0.7869 | rec 0.8600 | spec 0.9435 | acc 0.9213
+   best val dice 0.8018  (no gain for 1/20)
+                                                                                                    
+[Ep 034/60 |  56.7%]  20.4s | ETA   10.0 min | lr 1.41e-03
+   train: loss 0.4073 | dice 0.8019 | iou 0.7102
+   val  : loss 0.5697 | dice 0.7366 | iou 0.6257 | prec 0.6824 | rec 0.8983 | spec 0.8836 | acc 0.8883
+   best val dice 0.8018  (no gain for 2/20)
+                                                                                                    
+[Ep 035/60 |  58.3%]  19.9s | ETA    9.6 min | lr 1.33e-03
+   train: loss 0.4139 | dice 0.8013 | iou 0.7104
+   val  : loss 0.4398 | dice 0.8065 | iou 0.7124 | prec 0.8149 | rec 0.8571 | spec 0.9478 | acc 0.9244
+   best val dice 0.8065  <-- new best, model saved
+                                                                                                    
+[Ep 036/60 |  60.0%]  19.2s | ETA    9.2 min | lr 1.24e-03
+   train: loss 0.3892 | dice 0.8162 | iou 0.7271
+   val  : loss 0.3939 | dice 0.8181 | iou 0.7314 | prec 0.8412 | rec 0.8540 | spec 0.9664 | acc 0.9417
+   best val dice 0.8181  <-- new best, model saved
+                                                                                                    
+[Ep 037/60 |  61.7%]  21.8s | ETA    8.8 min | lr 1.15e-03
+   train: loss 0.3694 | dice 0.8209 | iou 0.7312
+   val  : loss 0.4188 | dice 0.8160 | iou 0.7294 | prec 0.8819 | rec 0.8111 | spec 0.9707 | acc 0.9363
+   best val dice 0.8181  (no gain for 1/20)
+                                                                                                    
+[Ep 038/60 |  63.3%]  19.8s | ETA    8.4 min | lr 1.07e-03
+   train: loss 0.3765 | dice 0.8186 | iou 0.7322
+   val  : loss 0.5186 | dice 0.7650 | iou 0.6604 | prec 0.7167 | rec 0.9188 | spec 0.8991 | acc 0.9026
+   best val dice 0.8181  (no gain for 2/20)
+                                                                                                    
+[Ep 039/60 |  65.0%]  20.6s | ETA    8.0 min | lr 9.88e-04
+   train: loss 0.3790 | dice 0.8180 | iou 0.7311
+   val  : loss 0.4089 | dice 0.8161 | iou 0.7245 | prec 0.8254 | rec 0.8646 | spec 0.9462 | acc 0.9296
+   best val dice 0.8181  (no gain for 3/20)
+                                                                                                    
+[Ep 040/60 |  66.7%]  21.3s | ETA    7.6 min | lr 9.07e-04
+   train: loss 0.3631 | dice 0.8261 | iou 0.7399
+   val  : loss 0.4012 | dice 0.8177 | iou 0.7277 | prec 0.8345 | rec 0.8601 | spec 0.9509 | acc 0.9328
+   best val dice 0.8181  (no gain for 4/20)
+                                                                                                    
+[Ep 041/60 |  68.3%]  21.0s | ETA    7.2 min | lr 8.28e-04
+   train: loss 0.3762 | dice 0.8196 | iou 0.7330
+   val  : loss 0.4510 | dice 0.8016 | iou 0.7189 | prec 0.9033 | rec 0.7846 | spec 0.9812 | acc 0.9325
+   best val dice 0.8181  (no gain for 5/20)
+                                                                                                    
+[Ep 042/60 |  70.0%]  21.1s | ETA    6.8 min | lr 7.51e-04
+   train: loss 0.3551 | dice 0.8271 | iou 0.7402
+   val  : loss 0.4164 | dice 0.8202 | iou 0.7386 | prec 0.8986 | rec 0.8075 | spec 0.9804 | acc 0.9410
+   best val dice 0.8202  <-- new best, model saved
+                                                                                                    
+[Ep 043/60 |  71.7%]  20.7s | ETA    6.4 min | lr 6.77e-04
+   train: loss 0.3572 | dice 0.8287 | iou 0.7429
+   val  : loss 0.3838 | dice 0.8248 | iou 0.7410 | prec 0.8960 | rec 0.8203 | spec 0.9785 | acc 0.9394
+   best val dice 0.8248  <-- new best, model saved
+                                                                                                    
+[Ep 044/60 |  73.3%]  21.0s | ETA    6.0 min | lr 6.05e-04
+   train: loss 0.3695 | dice 0.8215 | iou 0.7331
+   val  : loss 0.4123 | dice 0.8254 | iou 0.7445 | prec 0.9125 | rec 0.8009 | spec 0.9829 | acc 0.9413
+   best val dice 0.8254  <-- new best, model saved
+                                                                                                    
+[Ep 045/60 |  75.0%]  23.1s | ETA    5.6 min | lr 5.37e-04
+   train: loss 0.3515 | dice 0.8270 | iou 0.7429
+   val  : loss 0.3950 | dice 0.8256 | iou 0.7447 | prec 0.8932 | rec 0.8187 | spec 0.9767 | acc 0.9413
+   best val dice 0.8256  <-- new best, model saved
+                                                                                                    
+[Ep 046/60 |  76.7%]  20.5s | ETA    5.3 min | lr 4.71e-04
+   train: loss 0.3479 | dice 0.8328 | iou 0.7483
+   val  : loss 0.4308 | dice 0.8166 | iou 0.7354 | prec 0.9022 | rec 0.8053 | spec 0.9801 | acc 0.9367
+   best val dice 0.8256  (no gain for 1/20)
+                                                                                                    
+[Ep 047/60 |  78.3%]  21.2s | ETA    4.9 min | lr 4.10e-04
+   train: loss 0.3442 | dice 0.8317 | iou 0.7468
+   val  : loss 0.3796 | dice 0.8271 | iou 0.7454 | prec 0.8877 | rec 0.8353 | spec 0.9774 | acc 0.9423
+   best val dice 0.8271  <-- new best, model saved
+                                                                                                    
+[Ep 048/60 |  80.0%]  20.4s | ETA    4.5 min | lr 3.52e-04
+   train: loss 0.3273 | dice 0.8390 | iou 0.7554
+   val  : loss 0.3803 | dice 0.8261 | iou 0.7425 | prec 0.8715 | rec 0.8475 | spec 0.9703 | acc 0.9407
+   best val dice 0.8271  (no gain for 1/20)
+                                                                                                    
+[Ep 049/60 |  81.7%]  20.6s | ETA    4.1 min | lr 2.98e-04
+   train: loss 0.3222 | dice 0.8403 | iou 0.7565
+   val  : loss 0.3692 | dice 0.8335 | iou 0.7536 | prec 0.8920 | rec 0.8381 | spec 0.9761 | acc 0.9435
+   best val dice 0.8335  <-- new best, model saved
+                                                                                                    
+[Ep 050/60 |  83.3%]  19.9s | ETA    3.7 min | lr 2.48e-04
+   train: loss 0.3065 | dice 0.8516 | iou 0.7712
+   val  : loss 0.3830 | dice 0.8277 | iou 0.7460 | prec 0.8961 | rec 0.8268 | spec 0.9777 | acc 0.9418
+   best val dice 0.8335  (no gain for 1/20)
+                                                                                                    
+[Ep 051/60 |  85.0%]  20.3s | ETA    3.4 min | lr 2.02e-04
+   train: loss 0.3163 | dice 0.8441 | iou 0.7623
+   val  : loss 0.3875 | dice 0.8274 | iou 0.7451 | prec 0.8990 | rec 0.8227 | spec 0.9786 | acc 0.9412
+   best val dice 0.8335  (no gain for 2/20)
+                                                                                                    
+[Ep 052/60 |  86.7%]  21.3s | ETA    3.0 min | lr 1.60e-04
+   train: loss 0.3208 | dice 0.8439 | iou 0.7630
+   val  : loss 0.3800 | dice 0.8263 | iou 0.7473 | prec 0.8873 | rec 0.8368 | spec 0.9759 | acc 0.9415
+   best val dice 0.8335  (no gain for 3/20)
+                                                                                                    
+[Ep 053/60 |  88.3%]  22.1s | ETA    2.6 min | lr 1.24e-04
+   train: loss 0.3170 | dice 0.8453 | iou 0.7631
+   val  : loss 0.3807 | dice 0.8258 | iou 0.7455 | prec 0.8924 | rec 0.8301 | spec 0.9780 | acc 0.9417
+   best val dice 0.8335  (no gain for 4/20)
+                                                                                                    
+[Ep 054/60 |  90.0%]  20.7s | ETA    2.2 min | lr 9.14e-05
+   train: loss 0.3291 | dice 0.8397 | iou 0.7559
+   val  : loss 0.3702 | dice 0.8363 | iou 0.7561 | prec 0.9042 | rec 0.8304 | spec 0.9808 | acc 0.9447
+   best val dice 0.8363  <-- new best, model saved
+                                                                                                    
+[Ep 055/60 |  91.7%]  21.1s | ETA    1.9 min | lr 6.40e-05
+   train: loss 0.3152 | dice 0.8445 | iou 0.7616
+   val  : loss 0.3722 | dice 0.8368 | iou 0.7565 | prec 0.9003 | rec 0.8339 | spec 0.9792 | acc 0.9445
+   best val dice 0.8368  <-- new best, model saved
+                                                                                                    
+[Ep 056/60 |  93.3%]  20.1s | ETA    1.5 min | lr 4.14e-05
+   train: loss 0.3054 | dice 0.8504 | iou 0.7695
+   val  : loss 0.3660 | dice 0.8363 | iou 0.7563 | prec 0.8943 | rec 0.8395 | spec 0.9774 | acc 0.9450
+   best val dice 0.8368  (no gain for 1/20)
+                                                                                                    
+[Ep 057/60 |  95.0%]  21.1s | ETA    1.1 min | lr 2.38e-05
+   train: loss 0.3122 | dice 0.8503 | iou 0.7696
+   val  : loss 0.3688 | dice 0.8352 | iou 0.7553 | prec 0.8943 | rec 0.8388 | spec 0.9775 | acc 0.9446
+   best val dice 0.8368  (no gain for 2/20)
+                                                                                                    
+[Ep 058/60 |  96.7%]  20.0s | ETA    0.7 min | lr 1.11e-05
+   train: loss 0.3058 | dice 0.8476 | iou 0.7669
+   val  : loss 0.3693 | dice 0.8334 | iou 0.7539 | prec 0.8940 | rec 0.8375 | spec 0.9777 | acc 0.9445
+   best val dice 0.8368  (no gain for 3/20)
+                                                                                                    
+[Ep 059/60 |  98.3%]  19.9s | ETA    0.4 min | lr 3.54e-06
+   train: loss 0.3095 | dice 0.8491 | iou 0.7679
+   val  : loss 0.3706 | dice 0.8334 | iou 0.7536 | prec 0.8955 | rec 0.8359 | spec 0.9783 | acc 0.9444
+   best val dice 0.8368  (no gain for 4/20)
+                                                                                                    
+[Ep 060/60 | 100.0%]  20.8s | ETA    0.0 min | lr 1.00e-06
+   train: loss 0.3149 | dice 0.8459 | iou 0.7643
+   val  : loss 0.3700 | dice 0.8338 | iou 0.7540 | prec 0.8954 | rec 0.8364 | spec 0.9780 | acc 0.9444
+   best val dice 0.8368  (no gain for 5/20)
+I0000 00:00:1792394860.650370    7100 service.cc:153] XLA service 0x7eba88ece830 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1792394860.650715    7100 service.cc:161]   StreamExecutor [0]: NVIDIA GeForce RTX 4060 Laptop GPU, Compute Capability 8.9 (Driver: 12.7.0; Runtime: 12.9.0; Toolkit: 12.5.0; DNN: 9.21.1)
+I0000 00:00:1792394860.775873    7100 dump_mlir_util.cc:269] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+I0000 00:00:1792394878.738216    7100 device_compiler.h:208] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+
+================ TEST RESULTS ================
+GMACs            0.1245   target < 1.0     PASS
+Params (M)       0.2457   target <= 0.5    PASS
+Size (MB)        1.1860   target < 2.0     PASS
+FPS (model)     69.5631   target >= 50     PASS
+dice             0.8372   target > 0.95    FAIL
+iou              0.7619   target > 0.95    FAIL
+precision        0.8695   target > 0.95    FAIL
+recall           0.8521   target > 0.95    FAIL
+specificity      0.9747   target > 0.95    PASS
+accuracy         0.9521   target > 0.95    PASS
+FPS (e2e)       60.6060   (resize + normalize + model + threshold)
+/mnt/c/development/Thesis/PotatoDiseaseClassification-CNN/linux-venv/lib/python3.12/site-packages/keras/src/models/functional.py:258: UserWarning: The structure of `inputs` doesn't match the expected structure.
+Expected: ['input_layer_3']
+Received: inputs=Tensor(shape=(1, 160, 160, 3))
+  warnings.warn(msg)
+XAI figures saved to: /mnt/c/development/Thesis/PolypSegmentationBasedClassification/models/SC/tr-elm/xai
